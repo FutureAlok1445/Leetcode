@@ -1,31 +1,39 @@
 class Solution {
     public String reverseParentheses(String s) {
-        Stack<Character> st = new Stack<>();
 
-        for (char c : s.toCharArray()) {
-            if (c != ')') {
-                st.push(c);
-            } else {
-                StringBuilder temp = new StringBuilder();
+        int n = s.length();
+        int[] pair = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
 
-                while (st.peek() != '(') {
-                    temp.append(st.pop());
-                }
+        // Find matching brackets
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } 
+            else if (s.charAt(i) == ')') {
+                int open = stack.pop();
 
-                st.pop(); // remove '('
-
-                for (char x : temp.toString().toCharArray()) {
-                    st.push(x);
-                }
+                pair[open] = i;
+                pair[i] = open;
             }
         }
 
         StringBuilder ans = new StringBuilder();
+        int dir = 1;
 
-        while (!st.isEmpty()) {
-            ans.append(st.pop());
+        for (int i = 0; i < n; i += dir) {
+
+            char ch = s.charAt(i);
+
+            if (ch == '(' || ch == ')') {
+                i = pair[i];       // jump to matching bracket
+                dir = -dir;        // change direction
+            } 
+            else {
+                ans.append(ch);
+            }
         }
 
-        return ans.reverse().toString();
+        return ans.toString();
     }
 }
