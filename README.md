@@ -51,6 +51,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0022-generate-parentheses](https://github.com/FutureAlok1445/Leetcode/tree/master/0022-generate-parentheses) |
+| [3665-twisted-mirror-path-count](https://github.com/FutureAlok1445/Leetcode/tree/master/3665-twisted-mirror-path-count) |
 ## Backtracking
 |  |
 | ------- |
@@ -59,4 +60,9 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0066-plus-one](https://github.com/FutureAlok1445/Leetcode/tree/master/0066-plus-one) |
+| [3665-twisted-mirror-path-count](https://github.com/FutureAlok1445/Leetcode/tree/master/3665-twisted-mirror-path-count) |
+## Matrix
+|  |
+| ------- |
+| [3665-twisted-mirror-path-count](https://github.com/FutureAlok1445/Leetcode/tree/master/3665-twisted-mirror-path-count) |
 <!---LeetCode Topics End-->
