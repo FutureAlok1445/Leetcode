@@ -1,66 +1,55 @@
 class Solution {
     public int uniquePaths(int[][] grid) {
 
-        // Grid ki rows aur columns
         int m = grid.length;
         int n = grid[0].length;
 
-        // Large answer ko control mein rakhne ke liye
         int mod = 1000000007;
 
-        // Right se aane wale paths count
-        int[][] right = new int[m][n];
+        int[][] left = new int[m][n];
+        int[][] top = new int[m][n];
 
-        // Down se aane wale paths count
-        int[][] down = new int[m][n];
+        // Starting point
+        left[0][0] = 1;
 
-        // Starting point par 1 path hai
-        right[0][0] = 1;
-
-        // Har row check karo
         for (int i = 0; i < m; i++) {
-
-            // Har column check karo
             for (int j = 0; j < n; j++) {
 
-                // Agar cell normal hai (0)
+                // Current cell tak total ways
+                int ways = (left[i][j] + top[i][j]) % mod;
+
+                // Normal cell
                 if (grid[i][j] == 0) {
 
-                    // Dono taraf se aane wale paths add karo
-                    int total = (right[i][j] + down[i][j]) % mod;
-
-                    // Robot right ja sakta hai
+                    // Move right
                     if (j + 1 < n) {
-                        right[i][j + 1] =
-                            (right[i][j + 1] + total) % mod;
+                        left[i][j + 1] += ways;
+                        left[i][j + 1] %= mod;
                     }
 
-                    // Robot down ja sakta hai
+                    // Move down
                     if (i + 1 < m) {
-                        down[i + 1][j] =
-                            (down[i + 1][j] + total) % mod;
+                        top[i + 1][j] += ways;
+                        top[i + 1][j] %= mod;
                     }
 
-                } 
-                // Agar cell mirror hai (1)
-                else {
+                } else {
 
-                    // Right se aaya toh down bhejo
+                    // Mirror: left se aaye toh down
                     if (i + 1 < m) {
-                        down[i + 1][j] =
-                            (down[i + 1][j] + right[i][j]) % mod;
+                        top[i + 1][j] += left[i][j];
+                        top[i + 1][j] %= mod;
                     }
 
-                    // Down se aaya toh right bhejo
+                    // Mirror: top se aaye toh right
                     if (j + 1 < n) {
-                        right[i][j + 1] =
-                            (right[i][j + 1] + down[i][j]) % mod;
+                        left[i][j + 1] += top[i][j];
+                        left[i][j + 1] %= mod;
                     }
                 }
             }
         }
 
-        // Destination tak pahunchne wale total paths
-        return (right[m - 1][n - 1] + down[m - 1][n - 1]) % mod;
+        return (left[m - 1][n - 1] + top[m - 1][n - 1]) % mod;
     }
 }
